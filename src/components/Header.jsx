@@ -21,14 +21,20 @@ const Header = () => {
 	const [{ user }, dispatch] = useStateValue();
 
 	const login = async () => {
-		const {
-			user: { refreshToken, providerData },
-		} = await signInWithPopup(firebaseAuth, provider);
+		if (!user) {
+			const {
+				user: { refreshToken, providerData },
+			} = await signInWithPopup(firebaseAuth, provider);
 
-		dispatch({
-			type: actionType.SET_USER,
-			user: providerData[0],
-		});
+			dispatch({
+				type: actionType.SET_USER,
+				user: providerData[0],
+			});
+
+			// pushing the user information into the local storage
+			localStorage.setItem('user', JSON.stringify(providerData[0]));
+		} else {
+		}
 	};
 
 	return (
@@ -76,6 +82,9 @@ const Header = () => {
 							className="w-10 min-w-[40px] min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
 							onClick={login}
 						/>
+
+						{/* state menu for the profile */}
+						<div className="w-40 bg-primary shadow-xl rounded-lg absolute flex flex-col"></div>
 					</div>
 				</div>
 			</div>

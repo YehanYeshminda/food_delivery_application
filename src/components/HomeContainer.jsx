@@ -51,7 +51,7 @@ const HomeContainer = () => {
 				<div className="w-full h-full absolute top-0 left-0 flex items-center justify-center py-4 gap-4 flex-wrap lg:px-32">
 					{heroData &&
 						heroData.map((ele) => {
-							const { id, name, decp, price, imgSrc } = ele;
+							const { id, name, decp, price, imageSrc } = ele;
 
 							return (
 								<div
@@ -59,7 +59,7 @@ const HomeContainer = () => {
 									key={id}
 								>
 									<img
-										src={imgSrc}
+										src={imageSrc}
 										alt="ice cream"
 										className="w-20 lg:w-40 -mt-10 lg:-mt-20"
 									/>

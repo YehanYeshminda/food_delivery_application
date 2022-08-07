@@ -1,7 +1,77 @@
-import React from 'react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { MdFastfood } from 'react-icons/md';
+import { categories } from '../utils/data';
 
 const LoadCreateContainer = () => {
-	return <div>LoadCreateContainer</div>;
+	const [title, setTitle] = useState('');
+	const [calories, setCalories] = useState('');
+	const [price, setPrice] = useState('');
+	const [catergorie, setCatergorie] = useState(null);
+	const [fields, setFields] = useState(false);
+	const [imageAsset, setImageAsset] = useState(null);
+	const [alertStatus, setAlertStatus] = useState('danger');
+	const [msg, setMsg] = useState(null);
+	const [loading, setLoading] = useState(false);
+
+	return (
+		<div className="w-full min-h-screen flex items-center justify-center">
+			<div className="w-[90%] md:w-[75%] border border-gray-300 p-4 flex flex-col items-center justify-center gap-4">
+				{fields && (
+					<motion.p
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
+							alertStatus === 'danger'
+								? 'bg-red-400 text-red-800'
+								: 'bg-emerald-400 text-emerald-800'
+						}`}
+					>
+						{msg}
+					</motion.p>
+				)}
+
+				<div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+					<MdFastfood className="text-xl text-gray-700" />
+					<input
+						type="text"
+						required
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+						placeholder="Give me a Title..."
+						className="w-full h-full text-lg bg-transparent font-semibold outline-none border-none placeholder:text-gray-400 text-textColor"
+					/>
+				</div>
+
+				<div className="w-full">
+					<select
+						onChange={(e) => setCatergorie(e.target.value)}
+						className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+					>
+						<option value="other" className="bg-white">
+							Select Catergory
+						</option>
+
+						{categories &&
+							categories.map((ele) => {
+								const { id, name, urlParamName } = ele;
+
+								return (
+									<option
+										key={id}
+										className="text-base border-0 outline-none capitalize bg-white text-headingColor"
+										value={urlParamName}
+									>
+										{name}
+									</option>
+								);
+							})}
+					</select>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default LoadCreateContainer;

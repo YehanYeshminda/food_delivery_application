@@ -1,35 +1,74 @@
 import IceCream from '../img/i1.png';
 import Fruit from '../img/f1.png';
-import Cake from '../img/c1.png';
-import Berrys from '../img/fi1.png';
+import Chicken from '../img/c1.png';
+import Fish from '../img/fi1.png';
 
 export const heroData = [
 	{
 		id: 1,
-		name: 'ice cream',
-		decp: 'Chocolate & Vanilla',
-		price: '5.10',
-		imgSrc: IceCream,
+		name: 'Icecream',
+		decp: 'Chocolate & vanilla',
+		price: '5.25',
+		imageSrc: IceCream,
 	},
 	{
 		id: 2,
-		name: 'StrawBerries',
-		decp: 'Rasberry & Vanilla',
-		price: '5.10',
-		imgSrc: Fruit,
+		name: 'Strawberries',
+		decp: 'Fresh Strawberries',
+		price: '10.25',
+		imageSrc: Fruit,
 	},
 	{
 		id: 3,
-		name: 'Chocolate Cake',
-		decp: 'Chocolate & Strawberry',
-		price: '5.10',
-		imgSrc: Cake,
+		name: 'Chicken Kebab',
+		decp: 'Mixed Kebab Plate',
+		price: '8.25',
+		imageSrc: Chicken,
 	},
 	{
 		id: 4,
-		name: 'Berrys',
-		decp: 'Chocolate & Beef',
-		price: '5.10',
-		imgSrc: Berrys,
+		name: 'Fish Kebab',
+		decp: 'Mixed Fish Kebab',
+		price: '5.25',
+		imageSrc: Fish,
+	},
+];
+
+export const categories = [
+	{
+		id: 1,
+		name: 'Chicken',
+		urlParamName: 'chicken',
+	},
+	{
+		id: 2,
+		name: 'Curry',
+		urlParamName: 'curry',
+	},
+	{
+		id: 3,
+		name: 'Rice',
+		urlParamName: 'rice',
+	},
+	{
+		id: 4,
+		name: 'Fish',
+		urlParamName: 'fish',
+	},
+	{
+		id: 5,
+		name: 'Fruits',
+		urlParamName: 'fruits',
+	},
+	{
+		id: 6,
+		name: 'Icecreams',
+		urlParamName: 'icecreams',
+	},
+
+	{
+		id: 7,
+		name: 'Soft Drinks',
+		urlParamName: 'drinks',
 	},
 ];

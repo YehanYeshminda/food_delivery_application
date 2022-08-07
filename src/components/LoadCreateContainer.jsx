@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MdFastfood } from 'react-icons/md';
 import { categories } from '../utils/data';
+import Loader from './Loader';
 
 const LoadCreateContainer = () => {
 	const [title, setTitle] = useState('');
@@ -12,7 +13,7 @@ const LoadCreateContainer = () => {
 	const [imageAsset, setImageAsset] = useState(null);
 	const [alertStatus, setAlertStatus] = useState('danger');
 	const [msg, setMsg] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [isLoading, setLoading] = useState(true);
 
 	return (
 		<div className="w-full min-h-screen flex items-center justify-center">
@@ -68,6 +69,10 @@ const LoadCreateContainer = () => {
 								);
 							})}
 					</select>
+				</div>
+
+				<div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-420 cursor-pointer rounded-lg">
+					{isLoading ? <Loader /> : <></>}
 				</div>
 			</div>
 		</div>

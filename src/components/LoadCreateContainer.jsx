@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MdFastfood, MdCloudUpload, MdDelete } from 'react-icons/md';
+import {
+	MdFastfood,
+	MdCloudUpload,
+	MdDelete,
+	MdFoodBank,
+	MdAttachMoney,
+} from 'react-icons/md';
 import { categories } from '../utils/data';
 import Loader from './Loader';
 
@@ -45,7 +51,7 @@ const LoadCreateContainer = () => {
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder="Give me a Title..."
-						className="w-full h-full text-lg bg-transparent font-semibold outline-none border-none placeholder:text-gray-400 text-textColor"
+						className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
 					/>
 				</div>
 
@@ -120,6 +126,30 @@ const LoadCreateContainer = () => {
 							)}
 						</>
 					)}
+				</div>
+				<div className="w-full flex flex-col md:flex-row items-center gap-3">
+					<div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+						<MdFoodBank className="text-gray-700 text-2xl" />
+						<input
+							type="text"
+							required
+							value={calories}
+							onChange={(e) => setCalories(e.target.value)}
+							placeholder="Calories"
+							className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
+						/>
+					</div>
+					<div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+						<MdAttachMoney className="text-gray-700 text-2xl" />
+						<input
+							type="text"
+							required
+							value={price}
+							onChange={(e) => setPrice(e.target.value)}
+							placeholder="Price"
+							className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

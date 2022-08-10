@@ -9,6 +9,13 @@ import {
 } from 'react-icons/md';
 import { categories } from '../utils/data';
 import Loader from './Loader';
+import {
+	deleteObject,
+	getDownloadURL,
+	ref,
+	uploadBytesResumable,
+} from 'firebase/storage';
+import { storage } from '../firebase.config';
 
 const LoadCreateContainer = () => {
 	const [title, setTitle] = useState('');
@@ -19,17 +26,112 @@ const LoadCreateContainer = () => {
 	const [imageAsset, setImageAsset] = useState(null);
 	const [alertStatus, setAlertStatus] = useState('danger');
 	const [msg, setMsg] = useState(null);
-	const [isLoading, setLoading] = useState(false);
+	const [isLoading, setLoading] = useState();
 
-	const uploadImage = () => {};
+	// getting the image for the input
+	const uploadImage = (e) => {
+		setLoading(true);
 
-	const deleteImage = () => {};
+		// gettigng the file from the pc to a variable
+		const imageFile = e.target.files[0];
 
-	const saveDetails = () => {};
+		// uploading refernce to firebase
+		const storageReference = ref(
+			storage,
+			`Images/${Date.now()}-${imageFile.name}`
+		);
+
+		// getting the uploading time using the bytes
+		const uploadTask = uploadBytesResumable(storageReference, imageFile);
+
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				const uploadProgress =
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			},
+			(error) => {
+				console.log(error);
+				setFields(true);
+				setMsg('Error while uploading Image 🔴! Try Uploading Again!');
+				setAlertStatus('danger');
+				setTimeout(() => {
+					setFields(false);
+					setLoading(false);
+				}, 4000);
+			},
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+					setImageAsset(downloadUrl);
+					setLoading(false);
+					setFields(true);
+					setMsg('Image uploaded Sucesfully!😊');
+					setAlertStatus('success');
+					setTimeout(() => {
+						setFields(false);
+					}, 4000);
+				});
+			}
+		);
+	};
+
+	const deleteImage = () => {
+		setLoading(true);
+		const deleteReference = ref(storage, imageAsset);
+
+		deleteObject(deleteReference).then(() => {
+			setImageAsset(null);
+			setLoading(false);
+			setFields(true);
+			setMsg('Image Deleted Sucesfully!😊');
+			setAlertStatus('success');
+			setTimeout(() => {
+				setFields(false);
+			}, 4000);
+		});
+	};
+
+	const saveDetails = () => {
+		setLoading(true);
+
+		try {
+			if (!title || !calories || !imageAsset || !price || !catergorie) {
+				setFields(true);
+				setMsg(
+					'Required Fields are Missing! 🔴! Please Fill All The Required Fields!'
+				);
+				setAlertStatus('danger');
+				setTimeout(() => {
+					setFields(false);
+					setLoading(false);
+				}, 4000);
+			} else {
+				// this is the item object itself
+				const data = {
+					id: `${Date.now()}`,
+					title: title,
+					imageUrl: imageAsset,
+					catergorie: catergorie,
+					calories: calories,
+					qty: 1,
+					price: price,
+				};
+			}
+		} catch (error) {
+			console.log(error);
+			setFields(true);
+			setMsg('Error while Saving Informartion 🔴! Try Uploading Again!');
+			setAlertStatus('danger');
+			setTimeout(() => {
+				setFields(false);
+				setLoading(false);
+			}, 4000);
+		}
+	};
 
 	return (
 		<div className="w-full min-h-screen flex items-center justify-center">
-			<div className="w-[90%] md:w-[75%] border border-gray-300 p-4 flex flex-col items-center justify-center gap-4">
+			<div className="w-[90%] md:w-[75%] mt-8 border border-gray-300 p-4 flex flex-col items-center justify-center gap-4">
 				{fields && (
 					<motion.p
 						initial={{ opacity: 0 }}

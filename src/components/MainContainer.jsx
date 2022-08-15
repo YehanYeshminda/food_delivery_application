@@ -5,6 +5,7 @@ import RowContainer from './RowContainer';
 import { useStateValue } from '../context/StateProvider';
 import { useRef } from 'react';
 import { useState, useEffect } from 'react';
+import HotDishes from './HotDishes';
 
 const MainContainer = () => {
 	const [{ foodItems }, dispatch] = useStateValue();
@@ -18,14 +19,14 @@ const MainContainer = () => {
 
 			<section className="w-full my-6">
 				<div className="w-full flex items-center justify-between">
-					<p className="text-2xl font-semibold capitalize relative text-headingColor before:absolute before:rounded-lg before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-orange-400 to-orange-600 transition-all ease-in-out duration-100">
+					<p className="text-2xl font-semibold capitalize relative text-headingColor before:absolute before:rounded-lg before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-orange-400 to-orange-600 transition-all ease-in-out">
 						Our Fresh & Healthy Fruits to Eat
 					</p>
 
 					<div className="hidden md:flex items-center gap-3 ">
 						<motion.div
 							whileTap={{ scale: 0.75 }}
-							className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
+							className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer hover:shadow-lg flex items-center justify-center"
 						>
 							<MdChevronLeft
 								className="text-lg text-white"
@@ -49,6 +50,8 @@ const MainContainer = () => {
 					data={foodItems?.filter((n) => n.catergorie === 'fruits')}
 				/>
 			</section>
+
+			<HotDishes />
 		</div>
 	);
 };

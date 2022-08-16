@@ -56,6 +56,10 @@ module.exports = {
 				cartItem: '#2e3033',
 				cartTotal: '#343739',
 			},
+
+			zIndex: {
+				101: '101',
+			},
 		},
 	},
 	plugins: [require('tailwind-scrollbar')],

@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import RowContainer from './RowContainer';
 import { useStateValue } from '../context/StateProvider';
-import { useRef } from 'react';
 import { useState, useEffect } from 'react';
 import HotDishes from './HotDishes';
 

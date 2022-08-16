@@ -1,10 +1,13 @@
 import { IoFastFood } from 'react-icons/io5';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { categories } from '../utils/data';
 import { motion } from 'framer-motion';
+import RowContainer from './RowContainer';
+import { useStateValue } from '../context/StateProvider';
 
 const HotDishes = () => {
-	const [filter, setFilter] = useState('chicken');
+	const [filter, setFilter] = useState('fruits');
+	const [{ foodItems }, dispatch] = useStateValue();
 
 	return (
 		<section className="w-full my-6" id="menu">
@@ -51,6 +54,13 @@ const HotDishes = () => {
 								</motion.div>
 							);
 						})}
+				</div>
+
+				<div className="w-full">
+					<RowContainer
+						flag={false}
+						data={foodItems?.filter((n) => n.catergorie === filter)}
+					/>
 				</div>
 			</div>
 		</section>

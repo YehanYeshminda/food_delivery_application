@@ -1,6 +1,7 @@
 import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import NotFoundImg from '../img/NotFound.svg';
 
 const RowContainer = ({ flag, data, scrollValue }) => {
 	const rowContainer = useRef();
@@ -18,7 +19,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 					: `overflow-x-hidden flex-wrap justify-center`
 			} `}
 		>
-			{data &&
+			{data && data.length > 0 ? (
 				data.map((item) => {
 					const { id, calories, catergorie, imageUrl, price, qty, title } =
 						item;
@@ -29,12 +30,17 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 							key={id}
 						>
 							<div className="w-full flex items-center justify-between">
-								<motion.img
+								<motion.div
 									whileHover={{ scale: 1.2 }}
-									src={imageUrl}
-									alt=""
 									className="w-40 h-40 -mt-8 drop-shadow-2xl"
-								/>
+								>
+									<img
+										src={imageUrl}
+										alt="product"
+										className="w-full h-full object-contain"
+									/>
+								</motion.div>
+
 								<motion.div
 									whileTap={{ scale: 0.75 }}
 									className="w-8 h-8 rounded-full bg-red-700 flex items-center justify-center cursor-pointer hover:shadow-md"
@@ -59,7 +65,15 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 							</div>
 						</div>
 					);
-				})}
+				})
+			) : (
+				<div className="w-full flex flex-col items-center justify-center">
+					<img src={NotFoundImg} className="h-340" alt="not found" />
+					<p className="text-xl text-headingColor font-semibold my-2">
+						Items not Available
+					</p>
+				</div>
+			)}
 		</div>
 	);
 };

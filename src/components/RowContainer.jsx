@@ -2,13 +2,33 @@ import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import NotFoundImg from '../img/NotFound.svg';
+import { useStateValue } from '../context/StateProvider';
+import { actionType } from '../context/Reducer';
+import { useState } from 'react';
 
 const RowContainer = ({ flag, data, scrollValue }) => {
 	const rowContainer = useRef();
 
+	const [items, setItems] = useState([]);
+
+	const [{ cartItems }, dispatch] = useStateValue();
+
+	const addToCart = () => {
+		dispatch({
+			type: actionType.SET_CART_ITEMS,
+			cartItems: items,
+		});
+
+		localStorage.setItem('cartItems', JSON.stringify(items));
+	};
+
 	useEffect(() => {
 		rowContainer.current.scrollLeft += scrollValue;
 	}, [scrollValue]);
+
+	useEffect(() => {
+		addToCart();
+	}, [items]);
 
 	return (
 		<div
@@ -44,6 +64,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 								<motion.div
 									whileTap={{ scale: 0.75 }}
 									className="w-8 h-8 rounded-full bg-red-700 flex items-center justify-center cursor-pointer hover:shadow-md"
+									onClick={() => setItems([...cartItems, item])}
 								>
 									<MdShoppingBasket className="text-white" />
 								</motion.div>

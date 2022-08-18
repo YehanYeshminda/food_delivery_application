@@ -8,7 +8,7 @@ import HotDishes from './HotDishes';
 import CartContainer from './CartContainer';
 
 const MainContainer = () => {
-	const [{ foodItems }, dispatch] = useStateValue();
+	const [{ foodItems, cartShow }, dispatch] = useStateValue();
 	const [scrollValue, setScrollValue] = useState(0);
 
 	useEffect(() => {}, [scrollValue]);
@@ -53,7 +53,7 @@ const MainContainer = () => {
 
 			<HotDishes />
 
-			<CartContainer />
+			{cartShow && <CartContainer />}
 		</div>
 	);
 };

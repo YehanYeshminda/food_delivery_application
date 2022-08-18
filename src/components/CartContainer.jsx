@@ -72,6 +72,14 @@ const CartContainer = () => {
 						<p className="text-gray-200 text-xl font-semibold">Total</p>
 						<p className="text-gray-200 text-xl font-semibold">$ 2.5</p>
 					</div>
+
+					<motion.button
+						whileTap={{ scale: 0.75 }}
+						type="button"
+						className="w-full p-2 rounded-full bg-orange-500 text-gray-50 text-lg my-2 hover:shadow-lg transition-all duration-150 ease-out"
+					>
+						Check Out
+					</motion.button>
 				</div>
 			</div>
 		</div>
